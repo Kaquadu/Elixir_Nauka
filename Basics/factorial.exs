@@ -5,4 +5,4 @@ defmodule Math do
   end
 end
 
-IO.puts (Math.factorial(5))
+IO.puts (Math.factorial(1))
