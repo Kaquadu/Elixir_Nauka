@@ -1,6 +1,6 @@
 defmodule Calc_server do
   def init_server(arg1) do
-    Task.start_server(fn -> loop(arg1) end)
+    Task.start_link(fn -> loop(arg1) end)
   end
 
   defp loop(state) do
