@@ -1,6 +1,6 @@
-defmodule KV_storage do
-  def start_linking(arg1) do
-    Task.start_link(fn -> loop(arg1) end)
+defmodule Calc_server do
+  def init_server(arg1) do
+    Task.start_server(fn -> loop(arg1) end)
   end
 
   defp loop(state) do
@@ -48,4 +48,4 @@ defmodule Calculator do
 end
 
 
-KV_storage.start_linking(0)
+Calc_server.init_server(0)
