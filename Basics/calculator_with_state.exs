@@ -42,9 +42,9 @@ defmodule Calculator do
   def factorial(0), do: 1
   def factorial(n) when n > 0 do n*factorial(n-1) end
   def sqrt(n) when n>=0 do :math.sqrt(n) end
-  def sqrt(n) when n<0 do
-    Enum.join([to_string(:math.sqrt(abs(n))), " + i, ", to_string(:math.sqrt(abs(n))), " - i"])
-  end
+  #def sqrt(n) when n<0 do
+  #  Enum.join([to_string(:math.sqrt(abs(n))), " + i, ", to_string(:math.sqrt(abs(n))), " - i"])
+  #end
 end
 
 
