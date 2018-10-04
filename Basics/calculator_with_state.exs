@@ -1,6 +1,6 @@
 defmodule Calc_server do
   def init_server(arg1) do
-    Task.start_link(fn -> loop(arg1) end)
+    Task.start_link(fn -> loop(arg1, agr2) end)
   end
 
   defp loop(state) do
@@ -46,6 +46,5 @@ defmodule Calculator do
   #  Enum.join([to_string(:math.sqrt(abs(n))), " + i, ", to_string(:math.sqrt(abs(n))), " - i"])
   #end
 end
-
 
 Calc_server.init_server(0)
