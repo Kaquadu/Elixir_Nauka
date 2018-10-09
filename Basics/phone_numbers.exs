@@ -1,26 +1,22 @@
-defmodule Number_Splitter do
-  def incoming_call(number, decode_map) do
-    number_splitter(number, decode_map, "")
+defmodule NumberSplitter do
+  def call(number, decode_map) do
+    split_number(number, decode_map, "")
   end
 
-
-  defp number_splitter(number, decode_map, accumulator) do
-    <<x::bytes-size(1)>> <> rest = number
-    IO.puts accumulator <> x
-    IO.puts rest
-    value = key_checker([x, rest], decode_map)
-    IO.puts value
-    if value do
-      [x, rest]
+  defp split_number("", _, _), do: {:error, "Incorrect number"}
+  defp split_number(<<x::bytes-size(1)>> <> rest = number, decode_map, accumulator) do
+    accumulator = accumulator <> x
+    if Map.get(decode_map, accumulator) && String.length(rest) == decode_map[accumulator] do
+      [accumulator, rest]
     else
-      number_splitter(rest, decode_map, accumulator <> x)
+      split_number(rest, decode_map, accumulator)
     end
   end
 
-  defp key_checker([x, rest], decode_map) do
-    Map.has_key?(decode_map, x) && decode_map[x] == String.length(rest)
-  end
 end
 
 decode_map = %{"10" => 6, "113" => 7, "12" => 6, "48" => 9, "13" => 7, "15" => 7, "24" => 8, "312" => 8}
-Number_Splitter.incoming_call("10123123", decode_map)
+IO.inspect NumberSplitter.call("10123132", decode_map)
+IO.inspect NumberSplitter.call("48666123123", decode_map)
+IO.inspect NumberSplitter.call("", decode_map)
+IO.inspect NumberSplitter.call("32131", decode_map)
